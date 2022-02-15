@@ -10,8 +10,11 @@ public class Switch : MonoBehaviour
     public GameObject surroundEnvironment;
     public SpriteRenderer player;
 
+    [SerializeField] private Sprite regularSprite;
+    [SerializeField] private Sprite invertedSprite;
+
     // Extra Variables
-    private bool isLight = false;
+    public static bool IsInverted = false;
 
     void Update()
     {
@@ -20,23 +23,23 @@ public class Switch : MonoBehaviour
 
     public void Switcher()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isLight != true)
+        if (Input.GetKeyDown(KeyCode.Q) && IsInverted == false)
         {
             Camera.main.backgroundColor = Color.white;
-            player.color = Color.black;
+            player.sprite = invertedSprite;
             environment1.SetActive(false);
             environment2.SetActive(true);
             surroundEnvironment.GetComponentInChildren<SpriteRenderer>().color = Color.black;
-            isLight = true;
+            IsInverted = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && isLight == true)
+        else if (Input.GetKeyDown(KeyCode.Q) && IsInverted == true)
         {
             Camera.main.backgroundColor = Color.black;
-            player.color = Color.white;
+            player.sprite = regularSprite;
             environment1.SetActive(true);
             environment2.SetActive(false);
             surroundEnvironment.GetComponentInChildren<SpriteRenderer>().color = Color.white;
-            isLight = false;
+            IsInverted = false;
         }
     }
 }

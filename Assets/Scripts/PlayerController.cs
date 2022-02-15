@@ -2,60 +2,75 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+namespace InverseWorld
 {
-    [Header("Horizontal Movement")]
-    public float speed = 10f;
-
-    [Header("Vertical Movement")]
-    public float jumpHeight = 10f;
-
-
-    [Header("Object References")]
-    private Rigidbody2D rigidbody2d;
-    private BoxCollider2D boxCollider2d;
-
-    [Header("Ground Check")]
-    public LayerMask layerMask;
-    
-    // Extra Private Variables
-    private bool isFacingRight;
-
-    void Start()
+  public class PlayerController : CustomPhysics
     {
-        rigidbody2d = GetComponent<Rigidbody2D>();
-        boxCollider2d = GetComponent<BoxCollider2D>();
-    }
-
-    private void FixedUpdate()
-    {
-        if (Input.GetKey(KeyCode.A))
+        // Can change in inspector, controls player physics
+        [Header("Player Speed")]
+        [Space(10)]
+        public float maxSpeed = 5f;
+        
+        [Header("Player Jump Force")]
+        [Space(10)]
+        public float jumpForce = 5f;
+        
+        private SpriteRenderer _spriteRenderer;
+        private Animator _animator;
+        
+        public bool canMove = true;
+        private void Start()
         {
-            rigidbody2d.velocity = new Vector2(-speed, rigidbody2d.velocity.y);
-            isFacingRight = false;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            rigidbody2d.velocity = new Vector2(speed, rigidbody2d.velocity.y);
-            isFacingRight = true;
-        }
-        else
-        {
-            rigidbody2d.velocity = new Vector2 (0, rigidbody2d.velocity.y);
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _animator = GetComponent<Animator>();
         }
         
-        if (Input.GetKey(KeyCode.Space))
+        // Overriding the physics script's ComputeVelocity method to allow for the velocity of the player to be changed.
+        protected override void ComputeVelocity()
         {
-            Debug.Log("Gay");
-            rigidbody2d.velocity = Vector2.up * jumpHeight;
+            if (canMove)
+            {
+                // Reset the velocity.
+                Vector2 move = Vector2.zero;
+                // Ask for horizontal input.
+                move.x = Input.GetAxis("Horizontal");
+                // Input for jumping as well as adding a jump force.
+                if (Input.GetButtonDown("Jump") && Grounded)
+                {
+                    Velocity.y = jumpForce;
+                }
+                else if (Input.GetButtonUp("Jump"))
+                {
+                    if (Velocity.y > 0)
+                    {
+                        Velocity.y = Velocity.y * 0.5f;
+                    }
+                }
+                // Flip Character
+                if (move.x > 0.01f || move.x == 0)
+                {
+                    _spriteRenderer.flipX = false;
+                }
+                else if (move.x < 0.01f)
+                {
+                    _spriteRenderer.flipX = true;
+                }
+                
+                _animator.SetBool("isInverted", Switch.IsInverted);
+                _animator.SetFloat("velocityX", Mathf.Abs(Velocity.x) / maxSpeed);
+                /*
+                animator.SetBool("grounded", grounded);
+
+                animator.SetFloat("velocityY", velocity.y);
+                */
+                
+                // Modify the targetVelocity variable to change the x velocity in the physics script.
+                TargetVelocity = move * maxSpeed;
+            }
         }
     }
-
-    private bool IsGrounded()
-    {
-        float extraHeight = .2f;
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, extraHeight, layerMask);
-        return raycastHit.collider != null;
-    }
-    
 }
+
+
+
+ 
