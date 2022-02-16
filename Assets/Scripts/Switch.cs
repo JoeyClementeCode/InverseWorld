@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 namespace InverseWorld
 {
@@ -13,13 +15,16 @@ namespace InverseWorld
 
         [SerializeField] private Sprite regularSprite;
         [SerializeField] private Sprite invertedSprite;
-
+        [SerializeField] private InversionVignette iv;
+        
+        
         // Extra Variables
         public static bool IsInverted = false;
         public static int InversionLimit = 3;
 
         public float inversionTime = 10f;
         private bool timerOn = false;
+        
 
         void Update()
         {
@@ -40,7 +45,7 @@ namespace InverseWorld
                     if (Camera.main != null) 
                         Camera.main.backgroundColor = Color.white;
                     player.GetComponent<SpriteRenderer>().sprite = invertedSprite;
-                    player.GetComponent<Rigidbody2D>().gravityScale = -4f;
+                    player.GetComponent<Rigidbody2D>().gravityScale = -8f;
                     player.transform.localScale = new Vector3(1, -1, 1);
                     environment1.SetActive(false);
                     environment2.SetActive(true);
@@ -52,7 +57,7 @@ namespace InverseWorld
                     if (Camera.main != null) 
                         Camera.main.backgroundColor = Color.black;
                     player.GetComponent<SpriteRenderer>().sprite = regularSprite;
-                    player.GetComponent<Rigidbody2D>().gravityScale = 4f;
+                    player.GetComponent<Rigidbody2D>().gravityScale = 8f;
                     player.transform.localScale = new Vector3(1, 1, 1);
                     environment1.SetActive(true);
                     environment2.SetActive(false);
@@ -60,6 +65,7 @@ namespace InverseWorld
                     InversionLimit--;
                     timerOn = false;
                     inversionTime = 10f;
+                    iv.EndVignette();
                 }
             }
         }
@@ -72,6 +78,11 @@ namespace InverseWorld
             {
                 Destroy(player);
                 timerOn = false;
+            }
+
+            if (inversionTime < 5)
+            {
+                iv.StartVignette();
             }
         }
         
