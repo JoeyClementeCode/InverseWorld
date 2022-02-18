@@ -65,7 +65,6 @@ namespace InverseWorld
                     InversionLimit--;
                     timerOn = false;
                     inversionTime = 10f;
-                    iv.EndVignette();
                 }
             }
         }
@@ -82,7 +81,7 @@ namespace InverseWorld
 
             if (inversionTime < 5)
             {
-                iv.StartVignette();
+            
             }
         }
         

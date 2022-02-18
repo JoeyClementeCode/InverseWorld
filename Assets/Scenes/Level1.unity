@@ -12614,6 +12614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volume: {fileID: 2113313694}
+  cam: {fileID: 1776550558}
 --- !u!1001 &1863594890211898531
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -12,15 +12,20 @@ namespace InverseWorld
         public PostProcessVolume volume; //Assigned with the editor
         Vignette vignette;
 
+        private GameObject player;
+        [SerializeField] private GameObject cam;
+
         private void Start()
         {
+            player = GameObject.Find("Player");
             volume.profile.TryGetSettings(out vignette);
             vignette.intensity.value = 0f;
         }
 
         public void StartVignette()
         {
-            vignette.intensity.value = 1f;
+            vignette.intensity.value += .001f;
+            vignette.center.value = new Vector2(player.transform.position.x, player.transform.position.y);
         }
         
         public void EndVignette()
