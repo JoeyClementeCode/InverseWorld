@@ -34,6 +34,8 @@ namespace InverseWorld
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
             _rb = GetComponent<Rigidbody2D>();
+
+            transform.position = GameObject.Find("StartPoint").gameObject.transform.position;
         }
 
         private void Update()

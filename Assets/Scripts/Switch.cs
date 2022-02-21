@@ -42,29 +42,12 @@ namespace InverseWorld
             {
                 if (Input.GetKeyDown(KeyCode.Q) && IsInverted == false)
                 {
-                    if (Camera.main != null) 
-                        Camera.main.backgroundColor = Color.white;
-                    player.GetComponent<SpriteRenderer>().sprite = invertedSprite;
-                    player.GetComponent<Rigidbody2D>().gravityScale = -8f;
-                    player.transform.localScale = new Vector3(1, -1, 1);
-                    environment1.SetActive(false);
-                    environment2.SetActive(true);
-                    IsInverted = true;
-                    timerOn = true;
+                    Invert();
                 }
                 else if (Input.GetKeyDown(KeyCode.Q) && IsInverted == true)
                 {
-                    if (Camera.main != null) 
-                        Camera.main.backgroundColor = Color.black;
-                    player.GetComponent<SpriteRenderer>().sprite = regularSprite;
-                    player.GetComponent<Rigidbody2D>().gravityScale = 8f;
-                    player.transform.localScale = new Vector3(1, 1, 1);
-                    environment1.SetActive(true);
-                    environment2.SetActive(false);
-                    IsInverted = false;
+                    Revert();
                     InversionLimit--;
-                    timerOn = false;
-                    inversionTime = 10f;
                 }
             }
         }
@@ -83,6 +66,33 @@ namespace InverseWorld
             {
             
             }
+        }
+
+        public void Invert()
+        {
+            if (Camera.main != null) 
+                Camera.main.backgroundColor = Color.white;
+            player.GetComponent<SpriteRenderer>().sprite = invertedSprite;
+            player.GetComponent<Rigidbody2D>().gravityScale = -8f;
+            player.transform.localScale = new Vector3(1, -1, 1);
+            environment1.SetActive(false);
+            environment2.SetActive(true);
+            IsInverted = true;
+            timerOn = true;
+        }
+
+        public void Revert()
+        {
+            if (Camera.main != null) 
+                Camera.main.backgroundColor = Color.black;
+            player.GetComponent<SpriteRenderer>().sprite = regularSprite;
+            player.GetComponent<Rigidbody2D>().gravityScale = 8f;
+            player.transform.localScale = new Vector3(1, 1, 1);
+            environment1.SetActive(true);
+            environment2.SetActive(false);
+            IsInverted = false;
+            timerOn = false;
+            inversionTime = 10f;
         }
         
     }   
