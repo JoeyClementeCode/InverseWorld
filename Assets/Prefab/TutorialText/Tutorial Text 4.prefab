@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1934.8718, y: -1084.4712}
-  m_SizeDelta: {x: 7.0116, y: 0.5126}
+  m_AnchoredPosition: {x: -1935.9717, y: -1084.4712}
+  m_SizeDelta: {x: 4.8119, y: 0.5126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5062420735509247798
 CanvasRenderer:
@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: The number of times you can invert is displayed at the top
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c88704e87712f634b8f2477e187aefd3, type: 2}
-  m_sharedMaterial: {fileID: 1226421960575085740, guid: c88704e87712f634b8f2477e187aefd3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b3e988101b65e6e4abe5bad059419577, type: 2}
+  m_sharedMaterial: {fileID: 1674694583769811407, guid: b3e988101b65e6e4abe5bad059419577, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

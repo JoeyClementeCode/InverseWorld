@@ -66,10 +66,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: WASD TO Move
+  m_text: WASD To Move
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c88704e87712f634b8f2477e187aefd3, type: 2}
-  m_sharedMaterial: {fileID: 1226421960575085740, guid: c88704e87712f634b8f2477e187aefd3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b3e988101b65e6e4abe5bad059419577, type: 2}
+  m_sharedMaterial: {fileID: 1674694583769811407, guid: b3e988101b65e6e4abe5bad059419577, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -100,8 +100,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 32
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
