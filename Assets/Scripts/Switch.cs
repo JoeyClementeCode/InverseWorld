@@ -62,9 +62,9 @@ namespace InverseWorld
                 timerOn = false;
             }
 
-            if (inversionTime < 5)
+            if (inversionTime < 7.5f)
             {
-            
+                iv.StartVignette();
             }
         }
 
@@ -93,6 +93,7 @@ namespace InverseWorld
             IsInverted = false;
             timerOn = false;
             inversionTime = 10f;
+            iv.EndVignette();
         }
         
     }   

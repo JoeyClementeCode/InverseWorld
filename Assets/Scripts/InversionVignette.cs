@@ -25,7 +25,6 @@ namespace InverseWorld
         public void StartVignette()
         {
             vignette.intensity.value += .001f;
-            vignette.center.value = new Vector2(player.transform.position.x, player.transform.position.y);
         }
         
         public void EndVignette()
