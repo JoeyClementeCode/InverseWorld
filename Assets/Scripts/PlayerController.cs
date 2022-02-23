@@ -24,6 +24,7 @@ namespace InverseWorld
         private SpriteRenderer _spriteRenderer;
         private Animator _animator;
         private Rigidbody2D _rb;
+        private ParticleSystem _particles;
 
         private float horizontalInput;
         
@@ -34,6 +35,7 @@ namespace InverseWorld
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
             _rb = GetComponent<Rigidbody2D>();
+            _particles = GetComponent<ParticleSystem>();
 
             transform.position = GameObject.Find("StartPoint").gameObject.transform.position;
         }
@@ -50,10 +52,18 @@ namespace InverseWorld
             if(horizontalInput > 0.01f || horizontalInput == 0)
             {
                 _spriteRenderer.flipX = false;
+                /*var particlesShape = _particles.shape;
+                particlesShape.scale = new Vector3(-1, 1, 1);
+                particlesShape.position = new Vector3(-.21f, -0.48f, 0);
+                particlesShape.rotation = new Vector3(0, 0, -9.48f);*/
             }
             else if (horizontalInput < 0.01f)
             {
                 _spriteRenderer.flipX = true;
+               /* var particlesShape = _particles.shape;
+                particlesShape.scale = new Vector3(1, 1, 1);
+                particlesShape.position = new Vector3(.21f, -0.48f, 0);
+                particlesShape.rotation = new Vector3(0, 0, 9.48f);*/
             }
 
             _animator.SetBool("isInverted", Switch.IsInverted);

@@ -16,7 +16,8 @@ namespace InverseWorld
         [SerializeField] private Sprite regularSprite;
         [SerializeField] private Sprite invertedSprite;
         [SerializeField] private InversionVignette iv;
-        
+
+        private ParticleSystem playerParticle;
         
         // Extra Variables
         public static bool IsInverted = false;
@@ -24,7 +25,13 @@ namespace InverseWorld
 
         public float inversionTime = 10f;
         private bool timerOn = false;
-        
+
+        private void Start()
+        {
+            InversionLimit = 3;
+            playerParticle = player.GetComponent<ParticleSystem>();
+        }
+
 
         void Update()
         {
@@ -62,7 +69,7 @@ namespace InverseWorld
                 timerOn = false;
             }
 
-            if (inversionTime < 7.5f)
+            if (inversionTime < 5f)
             {
                 iv.StartVignette();
             }
@@ -75,6 +82,9 @@ namespace InverseWorld
             player.GetComponent<SpriteRenderer>().sprite = invertedSprite;
             player.GetComponent<Rigidbody2D>().gravityScale = -8f;
             player.transform.localScale = new Vector3(1, -1, 1);
+            /*var playerParticleMain = playerParticle.main;
+            playerParticleMain.gravityModifier = -1;
+            playerParticleMain.startColor = Color.black;*/
             environment1.SetActive(false);
             environment2.SetActive(true);
             IsInverted = true;
@@ -88,6 +98,9 @@ namespace InverseWorld
             player.GetComponent<SpriteRenderer>().sprite = regularSprite;
             player.GetComponent<Rigidbody2D>().gravityScale = 8f;
             player.transform.localScale = new Vector3(1, 1, 1);
+            /*var playerParticleMain = playerParticle.main;
+            playerParticleMain.gravityModifier = 1;
+            playerParticleMain.startColor = Color.white;*/
             environment1.SetActive(true);
             environment2.SetActive(false);
             IsInverted = false;
