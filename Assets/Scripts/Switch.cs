@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -16,6 +17,7 @@ namespace InverseWorld
         [SerializeField] private Sprite regularSprite;
         [SerializeField] private Sprite invertedSprite;
         [SerializeField] private InversionVignette iv;
+        [SerializeField] private TextMeshProUGUI countText;
 
         private ParticleSystem playerParticle;
         
@@ -79,6 +81,7 @@ namespace InverseWorld
         {
             if (Camera.main != null) 
                 Camera.main.backgroundColor = Color.white;
+            countText.color = Color.black;
             player.GetComponent<SpriteRenderer>().sprite = invertedSprite;
             player.GetComponent<Rigidbody2D>().gravityScale = -8f;
             player.transform.localScale = new Vector3(1, -1, 1);
@@ -95,6 +98,7 @@ namespace InverseWorld
         {
             if (Camera.main != null) 
                 Camera.main.backgroundColor = Color.black;
+            countText.color = Color.white;
             player.GetComponent<SpriteRenderer>().sprite = regularSprite;
             player.GetComponent<Rigidbody2D>().gravityScale = 8f;
             player.transform.localScale = new Vector3(1, 1, 1);

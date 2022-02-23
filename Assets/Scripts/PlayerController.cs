@@ -42,7 +42,7 @@ namespace InverseWorld
 
         private void Update()
         {
-            horizontalInput = Input.GetAxis("Horizontal");
+            horizontalInput = Input.GetAxisRaw("Horizontal");
 
             if (Input.GetKeyDown(KeyCode.Space))
             {

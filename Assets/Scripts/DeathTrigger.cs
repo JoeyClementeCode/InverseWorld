@@ -9,6 +9,7 @@ namespace InverseWorld
     {
         [SerializeField] private GameObject startPos;
         public static GameObject currentSpawnPos;
+        public static int currentInversionNumber;
         
         private Switch sw;
 
@@ -16,6 +17,7 @@ namespace InverseWorld
         {
             sw = GameObject.Find("SwitchManager").GetComponent<Switch>();
             currentSpawnPos = startPos;
+            currentInversionNumber = 3;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -27,7 +29,7 @@ namespace InverseWorld
                 var rb = other.GetComponent<Rigidbody2D>();
                 rb.velocity = Vector2.zero;
                 sw.Revert();
-                Switch.InversionLimit = CheckpointBehavior.currentInversionNumber;
+                Switch.InversionLimit = currentInversionNumber;
             }
         }
     }
