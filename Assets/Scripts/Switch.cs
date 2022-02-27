@@ -20,6 +20,7 @@ namespace InverseWorld
         [SerializeField] private TextMeshProUGUI countText;
 
         private ParticleSystem playerParticle;
+        private SpriteRenderer sr;
         
         // Extra Variables
         public static bool IsInverted = false;
@@ -32,6 +33,7 @@ namespace InverseWorld
         {
             InversionLimit = 3;
             playerParticle = player.GetComponent<ParticleSystem>();
+            sr = player.GetComponent<SpriteRenderer>();
         }
 
 
@@ -84,10 +86,10 @@ namespace InverseWorld
             countText.color = Color.black;
             player.GetComponent<SpriteRenderer>().sprite = invertedSprite;
             player.GetComponent<Rigidbody2D>().gravityScale = -8f;
-            player.transform.localScale = new Vector3(1, -1, 1);
-            /*var playerParticleMain = playerParticle.main;
+            sr.flipY = true;
+            var playerParticleMain = playerParticle.main;
             playerParticleMain.gravityModifier = -1;
-            playerParticleMain.startColor = Color.black;*/
+            playerParticleMain.startColor = Color.black;
             environment1.SetActive(false);
             environment2.SetActive(true);
             IsInverted = true;
@@ -101,10 +103,10 @@ namespace InverseWorld
             countText.color = Color.white;
             player.GetComponent<SpriteRenderer>().sprite = regularSprite;
             player.GetComponent<Rigidbody2D>().gravityScale = 8f;
-            player.transform.localScale = new Vector3(1, 1, 1);
-            /*var playerParticleMain = playerParticle.main;
+            sr.flipY = false;
+            var playerParticleMain = playerParticle.main;
             playerParticleMain.gravityModifier = 1;
-            playerParticleMain.startColor = Color.white;*/
+            playerParticleMain.startColor = Color.white;
             environment1.SetActive(true);
             environment2.SetActive(false);
             IsInverted = false;

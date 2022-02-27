@@ -21,7 +21,6 @@ namespace InverseWorld
         public float groundRadius;
         public LayerMask groundLayer;
         
-        private SpriteRenderer _spriteRenderer;
         private Animator _animator;
         private Rigidbody2D _rb;
         private ParticleSystem _particles;
@@ -32,7 +31,6 @@ namespace InverseWorld
         private bool canJump = true;
         private void Start()
         {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
             _rb = GetComponent<Rigidbody2D>();
             _particles = GetComponent<ParticleSystem>();
@@ -51,7 +49,7 @@ namespace InverseWorld
             
             if(horizontalInput > 0.01f || horizontalInput == 0)
             {
-                _spriteRenderer.flipX = false;
+                transform.localScale = new Vector3(1,1,1);
                 /*var particlesShape = _particles.shape;
                 particlesShape.scale = new Vector3(-1, 1, 1);
                 particlesShape.position = new Vector3(-.21f, -0.48f, 0);
@@ -59,7 +57,7 @@ namespace InverseWorld
             }
             else if (horizontalInput < 0.01f)
             {
-                _spriteRenderer.flipX = true;
+                transform.localScale = new Vector3(-1,1,1);
                /* var particlesShape = _particles.shape;
                 particlesShape.scale = new Vector3(1, 1, 1);
                 particlesShape.position = new Vector3(.21f, -0.48f, 0);
