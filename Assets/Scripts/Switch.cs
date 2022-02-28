@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 
 namespace InverseWorld
@@ -29,6 +30,8 @@ namespace InverseWorld
         public float inversionTime = 10f;
         private bool timerOn = false;
 
+        private bool isTesting = true;
+        
         private void Start()
         {
             InversionLimit = 3;
@@ -59,6 +62,11 @@ namespace InverseWorld
                 {
                     Revert();
                     InversionLimit--;
+                }
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    
                 }
             }
         }
@@ -114,7 +122,6 @@ namespace InverseWorld
             inversionTime = 10f;
             iv.EndVignette();
         }
-        
     }   
 }
 
