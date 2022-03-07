@@ -17,12 +17,11 @@ namespace InverseWorld
         {
             sw = GameObject.Find("SwitchManager").GetComponent<Switch>();
             currentSpawnPos = startPos;
-            currentInversionNumber = 3;
+            currentInversionNumber = Switch.InversionLimit;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            
             if (other.CompareTag("Player"))
             {
                 other.gameObject.transform.position = currentSpawnPos.transform.position;
@@ -30,6 +29,7 @@ namespace InverseWorld
                 rb.velocity = Vector2.zero;
                 sw.Revert();
                 Switch.InversionLimit = currentInversionNumber;
+                DoorSwitch.isOpened = false;
             }
         }
     }

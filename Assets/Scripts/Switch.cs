@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.Tilemaps;
+using static UnityEngine.Color;
 
 
 namespace InverseWorld
@@ -23,8 +25,11 @@ namespace InverseWorld
         private ParticleSystem playerParticle;
         private SpriteRenderer sr;
         
+        public PostProcessVolume volume; //Assigned with the editor
+        private Bloom bloom;
         // Extra Variables
         public static bool IsInverted = false;
+        public int inversionAmount = 3;
         public static int InversionLimit = 3;
 
         public float inversionTime = 10f;
@@ -34,9 +39,11 @@ namespace InverseWorld
         
         private void Start()
         {
-            InversionLimit = 3;
+            InversionLimit = inversionAmount;
             playerParticle = player.GetComponent<ParticleSystem>();
             sr = player.GetComponent<SpriteRenderer>();
+            
+            bloom = volume.profile.GetSetting<UnityEngine.Rendering.PostProcessing.Bloom>();
         }
 
 
@@ -90,14 +97,20 @@ namespace InverseWorld
         public void Invert()
         {
             if (Camera.main != null) 
-                Camera.main.backgroundColor = Color.white;
-            countText.color = Color.black;
+                Camera.main.backgroundColor = white;
+            countText.color = black;
             player.GetComponent<SpriteRenderer>().sprite = invertedSprite;
             player.GetComponent<Rigidbody2D>().gravityScale = -8f;
             sr.flipY = true;
+            
             var playerParticleMain = playerParticle.main;
             playerParticleMain.gravityModifier = -1;
-            playerParticleMain.startColor = Color.black;
+            playerParticleMain.startColor = black;
+            
+            var colorParameter = new UnityEngine.Rendering.PostProcessing.ColorParameter();
+            colorParameter.value = Color.black;
+            bloom.color.Override(colorParameter);
+            
             environment1.SetActive(false);
             environment2.SetActive(true);
             IsInverted = true;
@@ -107,14 +120,20 @@ namespace InverseWorld
         public void Revert()
         {
             if (Camera.main != null) 
-                Camera.main.backgroundColor = Color.black;
-            countText.color = Color.white;
+                Camera.main.backgroundColor = black;
+            countText.color = white;
             player.GetComponent<SpriteRenderer>().sprite = regularSprite;
             player.GetComponent<Rigidbody2D>().gravityScale = 8f;
             sr.flipY = false;
+            
             var playerParticleMain = playerParticle.main;
             playerParticleMain.gravityModifier = 1;
-            playerParticleMain.startColor = Color.white;
+            playerParticleMain.startColor = white;
+            
+            var colorParameter = new UnityEngine.Rendering.PostProcessing.ColorParameter();
+            colorParameter.value = Color.white;
+            bloom.color.Override(colorParameter);
+            
             environment1.SetActive(true);
             environment2.SetActive(false);
             IsInverted = false;

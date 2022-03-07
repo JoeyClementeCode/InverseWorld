@@ -50,4 +50,5 @@ MonoBehaviour:
   invertedSprite: {fileID: 21300000, guid: 9e78055b4b42c74469d514e69550e601, type: 3}
   iv: {fileID: 0}
   countText: {fileID: 0}
+  volume: {fileID: 0}
   inversionTime: 10
