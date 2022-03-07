@@ -30,6 +30,7 @@ namespace InverseWorld
                 sw.Revert();
                 Switch.InversionLimit = currentInversionNumber;
                 DoorSwitch.isOpened = false;
+                CounterCollectible.isCollected = false;
             }
         }
     }

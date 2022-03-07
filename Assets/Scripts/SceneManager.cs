@@ -16,5 +16,10 @@ namespace InverseWorld
         {
             Application.Quit();
         }
+
+        public void MainMenu()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
     }
 }

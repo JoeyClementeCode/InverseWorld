@@ -7,12 +7,28 @@ namespace InverseWorld
 {
     public class CounterCollectible : MonoBehaviour
     {
+        public static bool isCollected = false;
+        [SerializeField] private GameObject sprite;
+
+        private void Update()
+        {
+            if (isCollected == false)
+            {
+                sprite.SetActive(true);
+            }
+        }
+
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (col.CompareTag("Player"))
             {
-                Switch.InversionLimit++;
-                gameObject.SetActive(false);
+                if (isCollected == false)
+                {
+                    Switch.InversionLimit++;
+                    sprite.SetActive(false);
+                    isCollected = true;
+                }
+
             }
         }
         
