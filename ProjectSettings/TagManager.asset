@@ -42,6 +42,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Base
+    uniqueID: 877779759
+    locked: 0
+  - name: Exterior
+    uniqueID: 182048621
+    locked: 0
+  - name: Details
+    uniqueID: 2679967155
+    locked: 0
+  - name: Foliage
+    uniqueID: 2720309427
+    locked: 0
   - name: Player
     uniqueID: 440231863
     locked: 0

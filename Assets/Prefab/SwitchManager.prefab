@@ -43,12 +43,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f022ce727d30e8b42947eae0a7993ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  environment1: {fileID: 0}
-  environment2: {fileID: 0}
+  normalEnvironment: {fileID: 0}
+  inverseEnvironment: {fileID: 0}
+  normalBase: {fileID: 0}
+  inverseBase: {fileID: 0}
   player: {fileID: 0}
   regularSprite: {fileID: 21300000, guid: 2c6d641e0fd2da7468438363a79a4353, type: 3}
   invertedSprite: {fileID: 21300000, guid: 9e78055b4b42c74469d514e69550e601, type: 3}
   iv: {fileID: 0}
   countText: {fileID: 0}
   volume: {fileID: 0}
+  inversionAmount: 3
   inversionTime: 10

@@ -13,9 +13,16 @@ namespace InverseWorld
     public class Switch : MonoBehaviour
     {
         [Header("Object References")]
-        public GameObject environment1;
-        public GameObject environment2;
-        public GameObject player;
+        [SerializeField]
+        private Grid normalEnvironment;
+        [SerializeField]
+        private Grid inverseEnvironment;
+        [SerializeField]
+        private GameObject normalBase;
+        [SerializeField]
+        private GameObject inverseBase;
+        [SerializeField]
+        private GameObject player;
 
         [SerializeField] private Sprite regularSprite;
         [SerializeField] private Sprite invertedSprite;
@@ -110,9 +117,20 @@ namespace InverseWorld
             var colorParameter = new UnityEngine.Rendering.PostProcessing.ColorParameter();
             colorParameter.value = Color.black;
             bloom.color.Override(colorParameter);
+
+            var baseColliderNormal = normalBase.GetComponent<TilemapCollider2D>();
+            var baseColliderInverse = inverseBase.GetComponent<TilemapCollider2D>();
+            var baseTilemapNormal = normalBase.GetComponent<Tilemap>();
+            var baseTilemapInverse = inverseBase.GetComponent<Tilemap>();
             
-            environment1.SetActive(false);
-            environment2.SetActive(true);
+            normalEnvironment.enabled = false;
+            baseTilemapNormal.color = Color.white;
+            baseColliderNormal.isTrigger = true;
+            inverseEnvironment.enabled = true;
+            baseTilemapInverse.color = Color.white;
+            baseColliderInverse.isTrigger = false;
+            
+            
             IsInverted = true;
             timerOn = true;
         }
@@ -134,8 +152,19 @@ namespace InverseWorld
             colorParameter.value = Color.white;
             bloom.color.Override(colorParameter);
             
-            environment1.SetActive(true);
-            environment2.SetActive(false);
+            var baseColliderNormal = normalBase.GetComponent<TilemapCollider2D>();
+            var baseColliderInverse = inverseBase.GetComponent<TilemapCollider2D>();
+            var baseTilemapNormal = normalBase.GetComponent<Tilemap>();
+            var baseTilemapInverse = inverseBase.GetComponent<Tilemap>();
+            
+            normalEnvironment.enabled = true;
+            baseTilemapNormal.color = Color.black;
+            baseColliderNormal.isTrigger = false;
+            inverseEnvironment.enabled = false;
+            baseTilemapInverse.color = Color.black;
+            baseColliderInverse.isTrigger = true;
+            
+            
             IsInverted = false;
             timerOn = false;
             inversionTime = 10f;
