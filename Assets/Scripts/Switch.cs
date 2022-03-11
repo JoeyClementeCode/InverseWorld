@@ -14,9 +14,9 @@ namespace InverseWorld
     {
         [Header("Object References")]
         [SerializeField]
-        private Grid normalEnvironment;
+        private GameObject normalEnvironment;
         [SerializeField]
-        private Grid inverseEnvironment;
+        private GameObject inverseEnvironment;
         [SerializeField]
         private GameObject normalBase;
         [SerializeField]
@@ -123,10 +123,10 @@ namespace InverseWorld
             var baseTilemapNormal = normalBase.GetComponent<Tilemap>();
             var baseTilemapInverse = inverseBase.GetComponent<Tilemap>();
             
-            normalEnvironment.enabled = false;
+            normalEnvironment.SetActive(false);
             baseTilemapNormal.color = Color.white;
             baseColliderNormal.isTrigger = true;
-            inverseEnvironment.enabled = true;
+            inverseEnvironment.SetActive(true);
             baseTilemapInverse.color = Color.white;
             baseColliderInverse.isTrigger = false;
             
@@ -157,10 +157,10 @@ namespace InverseWorld
             var baseTilemapNormal = normalBase.GetComponent<Tilemap>();
             var baseTilemapInverse = inverseBase.GetComponent<Tilemap>();
             
-            normalEnvironment.enabled = true;
+            normalEnvironment.SetActive(true);
             baseTilemapNormal.color = Color.black;
             baseColliderNormal.isTrigger = false;
-            inverseEnvironment.enabled = false;
+            inverseEnvironment.SetActive(false);
             baseTilemapInverse.color = Color.black;
             baseColliderInverse.isTrigger = true;
             
