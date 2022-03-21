@@ -28,6 +28,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="Discover.Launch.Via.Unity" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -98,6 +100,8 @@
       <workItem from="1646692092862" duration="719000" />
       <workItem from="1646763680850" duration="1687000" />
       <workItem from="1646782670192" duration="368000" />
+      <workItem from="1647137015978" duration="2695000" />
+      <workItem from="1647404269238" duration="804000" />
     </task>
     <servers />
   </component>

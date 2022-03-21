@@ -42,7 +42,9 @@ namespace InverseWorld
         public float inversionTime = 10f;
         private bool timerOn = false;
 
-        private bool isTesting = true;
+        [SerializeField] private GameObject peekCircle;
+
+        private bool isPeeking = false;
         
         private void Start()
         {
@@ -56,8 +58,13 @@ namespace InverseWorld
 
         void Update()
         {
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            worldPos.z = 0;
+            peekCircle.transform.position = worldPos;
+            
             Switcher();
-
+            Peek();
+            
             if (timerOn)
             {
                 Timer();
@@ -68,19 +75,14 @@ namespace InverseWorld
         {
             if (InversionLimit > 0)
             {
-                if (Input.GetKeyDown(KeyCode.Q) && IsInverted == false)
+                if (Input.GetKeyDown(KeyCode.Space) && IsInverted == false)
                 {
                     Invert();
                 }
-                else if (Input.GetKeyDown(KeyCode.Q) && IsInverted == true)
+                else if (Input.GetKeyDown(KeyCode.Space) && IsInverted == true)
                 {
                     Revert();
                     InversionLimit--;
-                }
-
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    
                 }
             }
         }
@@ -129,6 +131,11 @@ namespace InverseWorld
             inverseEnvironment.SetActive(true);
             baseTilemapInverse.color = Color.white;
             baseColliderInverse.isTrigger = false;
+
+            if (isPeeking == true)
+            {
+                normalEnvironment.SetActive(true);
+            }
             
             
             IsInverted = true;
@@ -151,7 +158,7 @@ namespace InverseWorld
             var colorParameter = new UnityEngine.Rendering.PostProcessing.ColorParameter();
             colorParameter.value = Color.white;
             bloom.color.Override(colorParameter);
-            
+
             var baseColliderNormal = normalBase.GetComponent<TilemapCollider2D>();
             var baseColliderInverse = inverseBase.GetComponent<TilemapCollider2D>();
             var baseTilemapNormal = normalBase.GetComponent<Tilemap>();
@@ -163,12 +170,63 @@ namespace InverseWorld
             inverseEnvironment.SetActive(false);
             baseTilemapInverse.color = Color.black;
             baseColliderInverse.isTrigger = true;
+
+
+            if (isPeeking == true)
+            {
+                inverseEnvironment.SetActive(true);
+            }
             
             
             IsInverted = false;
             timerOn = false;
             inversionTime = 10f;
             iv.EndVignette();
+        }
+
+        private void Peek()
+        {
+            if (IsInverted)
+            {
+                var color = peekCircle.GetComponent<SpriteRenderer>();
+                color.color = Color.black;
+            }
+            else if (IsInverted == false)
+            {
+                var color = peekCircle.GetComponent<SpriteRenderer>();
+                color.color = Color.white;
+            }
+            
+            
+            
+            if (Input.GetKeyDown(KeyCode.Q) && isPeeking == false)
+            {
+                isPeeking = true;
+                peekCircle.SetActive(true);
+
+                if (IsInverted == false)
+                {
+                    inverseEnvironment.SetActive(true);
+                }
+                else if (IsInverted)
+                {
+                    normalEnvironment.SetActive(true);
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.Q) && isPeeking)
+            {
+                isPeeking = false;
+                peekCircle.SetActive(false);
+                
+                if (IsInverted == false)
+                {
+                    inverseEnvironment.SetActive(false);
+                }
+                else if (IsInverted)
+                {
+                    normalEnvironment.SetActive(false);
+                }
+            }
         }
     }   
 }

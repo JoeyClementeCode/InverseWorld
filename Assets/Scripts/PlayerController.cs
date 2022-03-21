@@ -42,7 +42,7 @@ namespace InverseWorld
         {
             horizontalInput = Input.GetAxisRaw("Horizontal");
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.W))
             {
                 canJump = true;
             }
